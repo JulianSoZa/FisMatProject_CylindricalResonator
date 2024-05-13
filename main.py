@@ -79,7 +79,7 @@ malla.point_data['Campo_Magnético'] = H
 
 original_mesh_pv = pv.wrap(malla)
 
-original_mesh_pv.save("malla.vtk")
+#original_mesh_pv.save("malla.vtk")
 
 labels = dict(xtitle='X', ytitle='Y')
 
