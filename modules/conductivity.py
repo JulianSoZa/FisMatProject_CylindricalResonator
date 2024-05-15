@@ -71,7 +71,7 @@ if __name__ == "__main__":
     
     df = pd.read_json("data/measurements.json")
     
-    material = df.loc['Sheet, 304 stainless','Steel']
+    material = df.loc['top cover','Copper']
     
     #material = {"f0": 10.47511340E9, "f1": 10.47236750E9, "f2": 10.47790310E9}
     
