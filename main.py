@@ -5,8 +5,8 @@ from modules import conductivity, TEnml
 
 # Modo TEnml
 n = 1
-m = 2
-l = 2
+m = 1
+l = 1
 
 #Dimensiones del cilindro (donde 'a' es el diametro y 'd' es la altura)
 a = 0.012
@@ -37,9 +37,9 @@ dis_rho = 32
 dis_phi = 64
 dis_z = 32
 
-dis_rho_vec = 2
-dis_phi_vec = 2
-dis_z_vec = 3
+dis_rho_vec = 4
+dis_phi_vec = 4
+dis_z_vec = 2
 
 #Generación de la malla
 malla = TEnml.TEnml_modes(n, m, l, a, d, mur, epsilonr, Aplus, dis_rho, dis_phi, dis_z, dis_rho_vec, dis_phi_vec, dis_z_vec)
@@ -53,7 +53,7 @@ TSenergy, powerl, Q_meas, Q_0, Q, sigma = conductivity.material_conductivity(n, 
 #Grafica de la malla
 plotter = pv.Plotter(shape=(1, 2))
 
-sel = 2
+sel = 1
 
 if (sel == 1): #Campo Electrico
     
@@ -61,7 +61,9 @@ if (sel == 1): #Campo Electrico
     plotter.add_mesh(malla, show_edges=False, cmap='jet', scalars='Campo_Electrico')
 
     plotter.subplot(0, 1)
-    plotter.add_arrows(malla.points, malla['Campo_Electrico_Vectorial'], mag=0.001, cmap='jet')
+    plotter.add_arrows(malla.points, malla['Campo_Electrico_Vectorial'], mag=0.0006, cmap='jet')
+    #plotter.add_arrows(malla.points, malla['Campo_Electrico_Vectorial'], mag=0.0015, cmap='jet', show_scalar_bar=False)
+    #plotter.view_xy()
 
 if (sel == 2): #Campo Magnético
     
@@ -69,7 +71,9 @@ if (sel == 2): #Campo Magnético
     plotter.add_mesh(malla, show_edges=False, cmap='jet', scalars='Campo_Magnético')
 
     plotter.subplot(0, 1)
-    plotter.add_arrows(malla.points, malla['Campo_Magnético_Vectorial'], mag=0.001, cmap='jet')
+    plotter.add_arrows(malla.points, malla['Campo_Magnético_Vectorial'], mag=0.0009, cmap='jet')
+    #plotter.add_arrows(malla.points, malla['Campo_Magnético_Vectorial'], mag=0.0009, cmap='jet', show_scalar_bar=False)
+    #plotter.view_xy()
     
 plotter.show_grid()
 plotter.show()
