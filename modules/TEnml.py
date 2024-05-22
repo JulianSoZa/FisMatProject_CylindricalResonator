@@ -22,7 +22,7 @@ def TEnml_modes(n, m, l, a, d, mur, epsilonr, Aplus, dis_rho, dis_phi, dis_z, di
     
     beta = np.sqrt(k**2 - (pnm_p/a)**2)
 
-    rho = np.linspace(0.000000001, a, dis_rho+1)
+    rho = np.linspace(0.0000001, a, dis_rho+1)
     phi = np.linspace(0, 3*np.pi/2, dis_phi+1)
     z = np.linspace(0, d, dis_z+1)
     
@@ -76,10 +76,56 @@ def TEnml_modes(n, m, l, a, d, mur, epsilonr, Aplus, dis_rho, dis_phi, dis_z, di
                     n8 = np.ravel_multi_index((i[0], j[0]+1, g[0]+1), (dis_rho+1, dis_phi+1, dis_z+1))
                     
                     celdas.append([n1, n2, n3, n4, n5, n6, n7, n8])
+                                      
+                if ((Ephi_m<0)&(Erho_m==0)):
+                    anguloE = 3*np.pi/2
+                    
+                if ((Ephi_m>0)&(Erho_m==0)):
+                    anguloE = np.pi/2
+                    
+                if ((Ephi_m==0)&(Erho_m==0)):
+                    anguloE = 0
+                    
+                if ((Ephi_m<=0)&(Erho_m<0)):
+                    anguloE = np.arctan(Ephi_m/Erho_m)+np.pi
+                
+                if ((Ephi_m<=0)&(Erho_m>0)):
+                    anguloE = np.arctan(Ephi_m/Erho_m)+2*np.pi
+                
+                if ((Ephi_m>=0)&(Erho_m>0)):
+                    anguloE = np.arctan2(Ephi_m, Erho_m)
+                    
+                if ((Ephi_m>=0)&(Erho_m<0)):
+                    anguloE = np.arctan2(Ephi_m, Erho_m)
+                    
+                    
+                    
+                if ((Hphi_m<0)&(Hrho_m==0)):
+                    anguloH = 3*np.pi/2
+                    
+                if ((Hphi_m>0)&(Hrho_m==0)):
+                    anguloH = np.pi/2
+                    
+                if ((Hphi_m==0)&(Hrho_m==0)):
+                    anguloH = 0
+                    
+                if ((Hphi_m<=0)&(Hrho_m<0)):
+                    anguloH = np.arctan(Hphi_m/Hrho_m)+np.pi
+                
+                if ((Hphi_m<=0)&(Hrho_m>0)):
+                    anguloH = np.arctan(Hphi_m/Hrho_m)+2*np.pi
+                
+                if ((Hphi_m>=0)&(Hrho_m>0)):
+                    anguloH = np.arctan2(Hphi_m, Hrho_m)
+                    
+                if ((Hphi_m>=0)&(Hrho_m<0)):
+                    anguloH = np.arctan2(Hphi_m, Hrho_m)
+                
+                    
                 
                 if((i[0]%dis_rho_vec==0)&(j[0]%dis_phi_vec==0)&(g[0]%dis_z_vec==0)):
-                    Evec.append([np.sqrt(Ephi_m**2 + Erho_m**2)*np.cos(j[1]), np.sqrt(Ephi_m**2 + Erho_m**2)*np.sin(j[1]), 0])
-                    Hvec.append([np.sqrt(Hrho_m**2 + Hphi_m**2 + Hz_m**2)*np.cos(j[1]), np.sqrt(Hrho_m**2 + Hphi_m**2 + Hz_m**2)*np.sin(j[1]), Hz_m])
+                    Evec.append([np.sqrt(Ephi_m**2 + Erho_m**2)*np.cos(j[1]+anguloE), np.sqrt(Ephi_m**2 + Erho_m**2)*np.sin(j[1]+anguloE), 0])
+                    Hvec.append([np.sqrt(Hrho_m**2 + Hphi_m**2 + Hz_m**2)*np.cos(j[1]+anguloH), np.sqrt(Hrho_m**2 + Hphi_m**2 + Hz_m**2)*np.sin(j[1]+anguloH), Hz_m])
                 else:
                     Evec.append([0, 0, 0])
                     Hvec.append([0, 0, 0])
