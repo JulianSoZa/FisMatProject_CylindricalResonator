@@ -1,7 +1,14 @@
+"""Este programa es realizado por Julian Andres Solano Zapardiel, Juan Manuel Arboleda Londoño y Karol Andrea Peña Arango
+   Para el proyecto de materia de la asignatura Fisica Matematica 2
+
+    Universidad EAFIT
+    13 de Mayo del 2024
+"""
 import numpy as np
 import pyvista as pv
 import pandas as pd
 from modules import conductivity, TEnml
+
 
 # Modo TEnml
 n = 1
